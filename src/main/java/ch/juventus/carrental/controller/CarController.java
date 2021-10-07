@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CarController {
-    @GetMapping("/helloWorld")
+    @GetMapping("/api/v1/helloWorld")
     public ResponseEntity<String> helloWorld() {
         String response = "Hello world!";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    @GetMapping("/goodbyeWorld")
+    @GetMapping("/api/v1/goodbyeWorld")
     public ResponseEntity<String> goodbyeWorld() {
         String response = "Goodbye, cruel world!";
         return new ResponseEntity<>(response, HttpStatus.OK);
