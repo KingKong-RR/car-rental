@@ -12,4 +12,9 @@ public class CarController {
         String response = "Hello world!";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @GetMapping("/goodbyeWorld")
+    public ResponseEntity<String> goodbyeWorld() {
+        String response = "Goodbye, cruel world!";
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
