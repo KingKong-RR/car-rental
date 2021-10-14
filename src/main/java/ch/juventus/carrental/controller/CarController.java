@@ -3,8 +3,7 @@ package ch.juventus.carrental.controller;
 import ch.juventus.carrental.service.CarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CarController {
@@ -31,5 +30,20 @@ public class CarController {
     public ResponseEntity<String> helloKitty() {
         String response = "Hello, Kitty!";
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/v1/cars/{id}")
+    public ResponseEntity<String> sef(@PathVariable Long id, @RequestBody Car updatedCar) {
+
+    }
+
+    // http://localhost:8080/api/va/cars?filter={airCondition: false, type: SUV, etc}
+    @GetMapping("/api/v1/cars")
+    public ResponseEntity<String> getCar(@RequestParam(value = "filter", required = false) Filter filter) {
+        if (filter != null) {
+            //get all cars and apply filter
+        } else {
+            //get all cars
+        }
     }
 }
