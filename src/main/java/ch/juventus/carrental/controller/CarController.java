@@ -1,5 +1,6 @@
 package ch.juventus.carrental.controller;
 
+import ch.juventus.carrental.app.Car;
 import ch.juventus.carrental.service.CarService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +35,11 @@ public class CarController {
 
     @GetMapping("/api/v1/cars/{id}")
     public ResponseEntity<String> sef(@PathVariable Long id, @RequestBody Car updatedCar) {
-
+        return null;
     }
 
     // http://localhost:8080/api/va/cars?filter={airCondition: false, type: SUV, etc}
+    /*
     @GetMapping("/api/v1/cars")
     public ResponseEntity<String> getCar(@RequestParam(value = "filter", required = false) Filter filter) {
         if (filter != null) {
@@ -46,4 +48,5 @@ public class CarController {
             //get all cars
         }
     }
+     */
 }
