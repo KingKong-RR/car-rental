@@ -11,17 +11,26 @@ import java.util.List;
 
 @Service
 public class CarService {
-    private final Database database;
+    private final FileDatabase database;
 
     public CarService(FileDatabase fileDatabase) {
         this.database = fileDatabase;
     }
-
+/*
     public String getHelloWorldGreeting() {
         return database.loadHelloWorldGreeting();
     }
 
-    public List<Car> getAllCars() { return database.getAllCars(); }
+ */
+
+    public List<Car> getCars() {
+//        return FileDatabase.getAllCars();
+//        log.info("Fetching all cars");
+        FileDatabase carList = new FileDatabase<>();
+        return carList.getAllCars();
+    }
+
+//    public List<Car> getAllCars() { return database.getAllCars(); }
 
    // public Car getCarById(String id) { return database.getCarById(); }
 
