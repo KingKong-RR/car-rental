@@ -91,4 +91,17 @@ public class Car {
         MANUAL,
         AUTOMATIC
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", gearShift='" + gearShift + '\'' +
+                ", seats=" + seats +
+                ", pricePerDay=" + pricePerDay +
+                ", airCondition=" + airCondition +
+                '}';
+    }
 }

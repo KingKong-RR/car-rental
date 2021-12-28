@@ -55,6 +55,8 @@ public class CarController {
         //carList.add(3, car3);
         //carList.add(1, car1);
         carList.add(new Car(1, "Fiat", "COUPE", "MANUAL", 4, 100, false));
+        carList.add(new Car(2, "BMW 5", "LIMOUSINE", "AUTOMATIC", 4, 120, true));
+        carList.add(new Car(3, "Toyota Prius", "COUPE", "AUTOMATIC", 2, 80, true));
         //String response = "im here";
 
         return new ResponseEntity<>(carList.toString(), HttpStatus.OK);
