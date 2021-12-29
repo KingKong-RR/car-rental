@@ -63,15 +63,7 @@ public class CarController {
         //String response = "im here";
 
         //return new ResponseEntity<>(carList.toString(), HttpStatus.OK);
-        String carRepository = "src/main/resources/carRepository.json";
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            ArrayList<String> carList2 = new ArrayList<>(Files.readAllLines(Paths.get(carRepository)));
-            return new ResponseEntity<>(carList2, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 
     // http://localhost:8080/api/va/cars?filter={airCondition: false, type: SUV, etc}

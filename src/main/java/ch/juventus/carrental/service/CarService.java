@@ -1,8 +1,12 @@
 package ch.juventus.carrental.service;
 
+import ch.juventus.carrental.app.Car;
 import ch.juventus.carrental.persistance.Database;
 import ch.juventus.carrental.persistance.FileDatabase;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CarService {
@@ -16,4 +20,5 @@ public class CarService {
         return database.loadHelloWorldGreeting();
     }
 
+    public ArrayList<String> getAllCars() { return database.getAllCars(); }
 }
