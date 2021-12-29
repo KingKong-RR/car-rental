@@ -42,7 +42,7 @@ public class CarController {
     }
 
     @GetMapping(path="/api/v1/cars", produces = "application/json")
-    public ResponseEntity<List> getCars() {
+    public ResponseEntity<List> getAllCars() {
         //return (List<Car>) new ResponseEntity<List<Car>>(carService.getCars(), HttpStatus.OK);
         //logger.info("Hit API endpoint, showing " + carService.getCars());
         //return carService.getCars();
