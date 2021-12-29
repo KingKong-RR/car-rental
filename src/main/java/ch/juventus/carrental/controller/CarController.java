@@ -42,7 +42,7 @@ public class CarController {
     }
 
     @GetMapping(path="/api/v1/cars", produces = "application/json")
-    public ResponseEntity<String> getCars() {
+    public ResponseEntity<List> getCars() {
         //return (List<Car>) new ResponseEntity<List<Car>>(carService.getCars(), HttpStatus.OK);
         //logger.info("Hit API endpoint, showing " + carService.getCars());
         //return carService.getCars();
@@ -59,7 +59,8 @@ public class CarController {
         carList.add(new Car(3, "Toyota Prius", "COUPE", "AUTOMATIC", 2, 80, true));
         //String response = "im here";
 
-        return new ResponseEntity<>(carList.toString(), HttpStatus.OK);
+        //return new ResponseEntity<>(carList.toString(), HttpStatus.OK);
+        return new ResponseEntity<>(List.of(carList), HttpStatus.OK);
     }
 
     // http://localhost:8080/api/va/cars?filter={airCondition: false, type: SUV, etc}
