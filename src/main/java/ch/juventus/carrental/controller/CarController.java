@@ -2,10 +2,13 @@ package ch.juventus.carrental.controller;
 
 import ch.juventus.carrental.app.Car;
 import ch.juventus.carrental.service.CarService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +63,15 @@ public class CarController {
         //String response = "im here";
 
         //return new ResponseEntity<>(carList.toString(), HttpStatus.OK);
-        return new ResponseEntity<>(List.of(carList), HttpStatus.OK);
+        String carRepository = "src/main/resources/carRepository.json";
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ArrayList<String> carList2 = new ArrayList<>(Files.readAllLines(Paths.get(carRepository)));
+            return new ResponseEntity<>(carList2, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     // http://localhost:8080/api/va/cars?filter={airCondition: false, type: SUV, etc}
