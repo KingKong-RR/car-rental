@@ -66,7 +66,7 @@ public class CarController {
         return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 
-    // http://localhost:8080/api/va/cars?filter={airCondition: false, type: SUV, etc}
+    // http://localhost:8080/api/v1/cars?filter={airCondition: false, type: SUV, etc}
     /*
     @GetMapping("/api/v1/cars")
     public ResponseEntity<String> getCar(@RequestParam(value = "filter", required = false) Filter filter) {

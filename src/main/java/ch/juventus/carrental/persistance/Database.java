@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface Database {
     String loadHelloWorldGreeting();
-    ArrayList<String> getAllCars();
+    ArrayList<Car> getAllCars();
     Car getCarById();
 }

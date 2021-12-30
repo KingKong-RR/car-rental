@@ -1,8 +1,10 @@
 package ch.juventus.carrental.persistance;
 
 import ch.juventus.carrental.app.Car;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+//import org.springframework.asm.TypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,7 @@ import java.util.List;
 public class FileDatabase implements Database {
 
     private String carRepository = "src/main/resources/carRepository.json";
+    private ArrayList<Car> carList;
 
     @Override
     public String loadHelloWorldGreeting() {
@@ -26,11 +29,21 @@ public class FileDatabase implements Database {
     }
 
     @Override
-    public ArrayList<String> getAllCars() {
+    public ArrayList<Car> getAllCars() {
+        /*
         ObjectMapper mapper = new ObjectMapper();
-        ArrayList<String> carList;
         try {
             carList = new ArrayList<>(Files.readAllLines(Paths.get(carRepository)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return carList;
+
+         */
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            ArrayList<Car> carList = mapper.readValue(new File(carRepository), new TypeReference<>() {});
             return carList;
         } catch (Exception e) {
             e.printStackTrace();

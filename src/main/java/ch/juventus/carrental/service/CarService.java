@@ -20,5 +20,5 @@ public class CarService {
         return database.loadHelloWorldGreeting();
     }
 
-    public ArrayList<String> getAllCars() { return database.getAllCars(); }
+    public ArrayList<Car> getAllCars() { return database.getAllCars(); }
 }
