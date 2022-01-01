@@ -9,6 +9,19 @@ public class Car {
     private int pricePerDay;
     private Boolean airCondition;
 
+    public Car(Long id, String name, String type, String gearShift, int seats, int pricePerDay, Boolean airCondition) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.gearShift = gearShift;
+        this.seats = seats;
+        this.pricePerDay = pricePerDay;
+        this.airCondition = airCondition;
+    }
+
+    public Car() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -63,33 +76,6 @@ public class Car {
 
     public void setAirCondition(Boolean airCondition) {
         this.airCondition = airCondition;
-    }
-
-    public Car(Long id, String name, String type, String gearShift, int seats, int pricePerDay, Boolean airCondition) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.gearShift = gearShift;
-        this.seats = seats;
-        this.pricePerDay = pricePerDay;
-        this.airCondition = airCondition;
-    }
-
-    public Car() {
-    }
-
-    enum Type {
-        CABRIO,
-        LIMOUSINE,
-        SUV,
-        MINIBUS,
-        COUPE,
-        ESTATE
-    }
-
-    enum GearShift {
-        MANUAL,
-        AUTOMATIC
     }
 
     @Override
