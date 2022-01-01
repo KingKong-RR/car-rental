@@ -1,7 +1,7 @@
 package ch.juventus.carrental.app;
 
 public class Car {
-    private int id;
+    private Long id;
     private String name;
     private String type;
     private String gearShift;
@@ -9,11 +9,11 @@ public class Car {
     private int pricePerDay;
     private Boolean airCondition;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -65,7 +65,7 @@ public class Car {
         this.airCondition = airCondition;
     }
 
-    public Car(int id, String name, String type, String gearShift, int seats, int pricePerDay, Boolean airCondition) {
+    public Car(Long id, String name, String type, String gearShift, int seats, int pricePerDay, Boolean airCondition) {
         this.id = id;
         this.name = name;
         this.type = type;

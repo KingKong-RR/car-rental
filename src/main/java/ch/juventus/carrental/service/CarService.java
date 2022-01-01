@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class CarService {
     private final Database database;
+    private String id;
 
     public CarService(FileDatabase fileDatabase) {
         this.database = fileDatabase;
@@ -20,5 +21,11 @@ public class CarService {
         return database.loadHelloWorldGreeting();
     }
 
-    public ArrayList<Car> getAllCars() { return database.getAllCars(); }
+    public ArrayList<Car> getAllCars() {
+        return database.getAllCars();
+    }
+
+    public Car getCarById(Long id) {
+        return database.getCarById(id);
+    }
 }

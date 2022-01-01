@@ -16,12 +16,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class FileDatabase implements Database {
 
     private String carRepository = "src/main/resources/carRepository.json";
     private ArrayList<Car> carList;
+    private Long id;
 
     @Override
     public String loadHelloWorldGreeting() {
@@ -43,8 +45,7 @@ public class FileDatabase implements Database {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            ArrayList<Car> carList = mapper.readValue(new File(carRepository), new TypeReference<>() {});
-            return carList;
+            return mapper.readValue(new File(carRepository), new TypeReference<>() {});
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,7 +53,19 @@ public class FileDatabase implements Database {
     }
 
     @Override
-    public Car getCarById() {
+    public Car getCarById(Long id) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            ArrayList<Car> carList = mapper.readValue(new File(carRepository), new TypeReference<>() {});
+            for (Car car : carList) {
+               if (Objects.equals(car.getId(), id)) {
+                   return car;
+               }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

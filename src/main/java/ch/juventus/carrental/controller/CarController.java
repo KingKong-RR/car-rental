@@ -1,8 +1,11 @@
 package ch.juventus.carrental.controller;
 
+import ch.juventus.carrental.CarRentalApplication;
 import ch.juventus.carrental.app.Car;
 import ch.juventus.carrental.service.CarService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,7 @@ import java.util.List;
 public class CarController {
 
     private final CarService carService;
+    private static final Logger logger = LogManager.getLogger(CarRentalApplication.class);
 
     public CarController(CarService carService) {
         this.carService = carService;
@@ -40,29 +44,14 @@ public class CarController {
     }
 
     @GetMapping("/api/v1/cars/{id}")
-    public ResponseEntity<String> sef(@PathVariable Long id, @RequestBody Car updatedCar) {
-        return null;
+    public ResponseEntity<Car> getCarById(@PathVariable Long id) {
+        return new ResponseEntity<>(carService.getCarById(id), HttpStatus.OK);
     }
 
     @GetMapping(path="/api/v1/cars", produces = "application/json")
     public ResponseEntity<List> getAllCars() {
-        //return (List<Car>) new ResponseEntity<List<Car>>(carService.getCars(), HttpStatus.OK);
-        //logger.info("Hit API endpoint, showing " + carService.getCars());
-        //return carService.getCars();
-        ArrayList<Car> carList = new ArrayList<>();
-        Car car1 = new Car(1, "Mercedes E", "LIMOUSINE", "MANUAL", 4, 100, false);
-        Car car2 = new Car(2, "BMW 5", "LIMOUSINE", "AUTOMATIC", 4, 120, true);
-        Car car3 = new Car(3, "Toyota Prius", "COUPE", "AUTOMATIC", 2, 80, true);
-        //carList.add(1, car1);
-        //carList.add(2, car2);
-        //carList.add(3, car3);
-        //carList.add(1, car1);
-        carList.add(new Car(1, "Fiat", "COUPE", "MANUAL", 4, 100, false));
-        carList.add(new Car(2, "BMW 5", "LIMOUSINE", "AUTOMATIC", 4, 120, true));
-        carList.add(new Car(3, "Toyota Prius", "COUPE", "AUTOMATIC", 2, 80, true));
-        //String response = "im here";
+        logger.info("Hit API endpoint, showing " + carService.getAllCars());
 
-        //return new ResponseEntity<>(carList.toString(), HttpStatus.OK);
         return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 

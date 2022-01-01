@@ -8,5 +8,5 @@ import java.util.List;
 public interface Database {
     String loadHelloWorldGreeting();
     ArrayList<Car> getAllCars();
-    Car getCarById();
+    Car getCarById(Long id);
 }
