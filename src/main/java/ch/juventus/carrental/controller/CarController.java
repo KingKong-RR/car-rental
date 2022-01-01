@@ -56,13 +56,18 @@ public class CarController {
     }
 
     @PostMapping(path="/api/v1/car")
+    /*
     public ResponseEntity<String> addCar(@RequestParam Long id, @RequestParam String name,
                                        @RequestParam String type, @RequestParam String gearShift,
                                        @RequestParam int seats, @RequestParam int pricePerDay,
                                        @RequestParam Boolean airCondition) {
+
+     */
+    public ResponseEntity<String> addCar(@RequestBody Long id, String name, String type, String gearShift,
+                                               int seats, int pricePerDay, Boolean airCondition) {
         Car car = new Car(id, name, type, gearShift, seats, pricePerDay, airCondition);
         carService.addCar(car);
-        return null;
+        return new ResponseEntity<String>(car.toString(), HttpStatus.OK);
     }
     // http://localhost:8080/api/v1/cars?filter={airCondition: false, type: SUV, etc}
     /*
