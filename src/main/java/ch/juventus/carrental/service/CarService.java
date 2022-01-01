@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class CarService {
     private final Database database;
     private String id;
+    private Car car;
 
     public CarService(FileDatabase fileDatabase) {
         this.database = fileDatabase;
@@ -27,4 +28,6 @@ public class CarService {
     public Car getCarById(Long id) {
         return database.getCarById(id);
     }
+
+    public String addCar(Car car) { return database.addCar(this.car); }
 }

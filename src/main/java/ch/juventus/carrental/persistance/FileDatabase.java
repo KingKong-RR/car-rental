@@ -15,6 +15,7 @@ public class FileDatabase implements Database {
 
     private String carRepository = "src/main/resources/carRepository.json";
     private ArrayList<Car> carList;
+    private Car car;
     private Long id;
 
     @Override
@@ -58,6 +59,12 @@ public class FileDatabase implements Database {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @Override
+    public String addCar(Car car) {
+        carList.add(car);
         return null;
     }
 

@@ -55,6 +55,15 @@ public class CarController {
         return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 
+    @PostMapping(path="/api/v1/car")
+    public ResponseEntity<String> addCar(@RequestParam Long id, @RequestParam String name,
+                                       @RequestParam String type, @RequestParam String gearShift,
+                                       @RequestParam int seats, @RequestParam int pricePerDay,
+                                       @RequestParam Boolean airCondition) {
+        Car car = new Car(id, name, type, gearShift, seats, pricePerDay, airCondition);
+        carService.addCar(car);
+        return null;
+    }
     // http://localhost:8080/api/v1/cars?filter={airCondition: false, type: SUV, etc}
     /*
     @GetMapping("/api/v1/cars")
