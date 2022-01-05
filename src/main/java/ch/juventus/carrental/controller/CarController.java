@@ -3,6 +3,7 @@ package ch.juventus.carrental.controller;
 import ch.juventus.carrental.CarRentalApplication;
 import ch.juventus.carrental.app.Car;
 import ch.juventus.carrental.service.CarService;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,19 +32,7 @@ public class CarController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/goodbyeWorld")
-    public ResponseEntity<String> goodbyeWorld() {
-        String response = "Goodbye, cruel world!";
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/api/v1/helloKitty")
-    public ResponseEntity<String> helloKitty() {
-        String response = "Hello, Kitty!";
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/api/v1/cars/{id}")
+    @GetMapping("/api/v1/car/{id}")
     public ResponseEntity<Car> getCarById(@PathVariable Long id) {
         return new ResponseEntity<>(carService.getCarById(id), HttpStatus.OK);
     }
@@ -63,12 +52,14 @@ public class CarController {
                                        @RequestParam Boolean airCondition) {
 
      */
+    /* TOFIX:
     public ResponseEntity<String> addCar(@RequestBody Long id, String name, String type, String gearShift,
                                                int seats, int pricePerDay, Boolean airCondition) {
-        Car car = new Car(id, name, type, gearShift, seats, pricePerDay, airCondition);
+        //Car car = new Car(new ObjectMapper().readValue(id, name, type, gearShift, seats, pricePerDay, airCondition), new TypeReference<>() {});
         carService.addCar(car);
-        return new ResponseEntity<String>(car.toString(), HttpStatus.OK);
+        return new ResponseEntity<String>(car.toString(), HttpStatus.CREATED);
     }
+     */
     // http://localhost:8080/api/v1/cars?filter={airCondition: false, type: SUV, etc}
     /*
     @GetMapping("/api/v1/cars")
