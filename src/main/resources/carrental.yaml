@@ -1,0 +1,148 @@
+swagger: "2.0"
+info:
+  description: "Car rental service using Spring Boot API"
+  version: "1.0.0"
+  title: "Car Rental"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost"
+basePath: "/api/v1"
+tags:
+  - name: "car"
+    description: "Car API endpoint"
+schemes:
+  - "http"
+paths:
+  /cars:
+    post:
+      tags:
+        - "cars"
+      summary: "Lists all cars"
+      description: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Car object that needs to be added to the car repository"
+          required: true
+          schema:
+            $ref: "#/definitions/Car"
+      responses:
+        "405":
+          description: "Invalid input"
+    put:
+      tags:
+        - "cars"
+      summary: "Update an existing car"
+      description: ""
+      operationId: "updateCar"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Car object that needs to be added to the store"
+          required: true
+          schema:
+            $ref: "#/definitions/Car"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Car not found"
+        "405":
+          description: "Validation exception"
+  /car/{id}:
+    get:
+      tags:
+        - "car"
+      summary: "Find car by ID"
+      description: "Returns a single car"
+      operationId: "getCarById"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of car to return"
+          required: true
+          type: "number"
+          format: "Long"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Car"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Car not found"
+    delete:
+      tags:
+        - "car"
+      summary: "Deletes a car"
+      description: ""
+      operationId: "deleteCar"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Car id to delete"
+          required: true
+          type: "number"
+          format: "Long"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Car not found"
+definitions:
+  Car:
+    type: "object"
+    required:
+      - "id"
+      - "name"
+      - "type"
+      - "gearShift"
+      - "seats"
+      - "airCondition"
+    properties:
+      id:
+        type: "number"
+        format: "Long"
+      name:
+        type: "string"
+        example: "Mercedes E"
+        items:
+          type: "string"
+      type:
+        type: "string"
+      gearShift:
+        type: "string"
+        description: "Automatic or Manual"
+        enum:
+          - "automatic"
+          - "manual"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
