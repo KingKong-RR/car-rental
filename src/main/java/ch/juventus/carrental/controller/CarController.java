@@ -3,6 +3,7 @@ package ch.juventus.carrental.controller;
 import ch.juventus.carrental.CarRentalApplication;
 import ch.juventus.carrental.app.Car;
 import ch.juventus.carrental.service.CarService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
@@ -12,9 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost,http://127.0.0.1", maxAge = 3600)
@@ -51,25 +49,17 @@ public class CarController {
     @CrossOrigin
     @DeleteMapping("/api/v1/car/{id}")
     public ResponseEntity<String> deleteCarByID(@PathVariable Long id) throws IOException {
+        logger.info("Deleting car " + carService.getCarById(id).toString() + " from repository.");
         return new ResponseEntity<>(carService.deleteCarById(id), HttpStatus.OK);
     }
 
-    /*
     @PostMapping(path="/api/v1/car")
-    public ResponseEntity<String> addCar(@RequestParam Long id, @RequestParam String name,
-                                       @RequestParam String type, @RequestParam String gearShift,
-                                       @RequestParam int seats, @RequestParam int pricePerDay,
-                                       @RequestParam Boolean airCondition) {
-
-     */
-    /* TOFIX:
-    public ResponseEntity<String> addCar(@RequestBody Long id, String name, String type, String gearShift,
-                                               int seats, int pricePerDay, Boolean airCondition) {
-        Car car = new Car(new ObjectMapper().readValue(id, name, type, gearShift, seats, pricePerDay, airCondition), new TypeReference<>() {});
+    public ResponseEntity<String> addCar(@RequestBody Car car) {
+        logger.info("Adding car to repository: " + car);
         carService.addCar(car);
-        return new ResponseEntity<String>(car.toString(), HttpStatus.CREATED);
+        return null;
     }
-     */
+
     // http://localhost:8080/api/v1/cars?filter={airCondition: false, type: SUV, etc}
     /*
     @GetMapping("/api/v1/cars")

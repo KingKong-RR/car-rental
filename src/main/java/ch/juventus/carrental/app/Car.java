@@ -1,7 +1,10 @@
 package ch.juventus.carrental.app;
 
+import java.util.Optional;
+import java.util.Random;
+
 public class Car {
-    private Long id;
+    private Long id = new Random().longs(1).iterator().nextLong();;
     private String name;
     private String type;
     private String gearShift;
@@ -9,6 +12,16 @@ public class Car {
     private int pricePerDay;
     private Boolean airCondition;
 
+    public Car(String name, String type, String gearShift, int seats, int pricePerDay, Boolean airCondition) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.gearShift = gearShift;
+        this.seats = seats;
+        this.pricePerDay = pricePerDay;
+        this.airCondition = airCondition;
+    }
+/*
     public Car(Long id, String name, String type, String gearShift, int seats, int pricePerDay, Boolean airCondition) {
         this.id = id;
         this.name = name;
@@ -19,6 +32,8 @@ public class Car {
         this.airCondition = airCondition;
     }
 
+
+ */
     public Car() {
     }
 
@@ -77,6 +92,7 @@ public class Car {
     public void setAirCondition(Boolean airCondition) {
         this.airCondition = airCondition;
     }
+
 
     @Override
     public String toString() {

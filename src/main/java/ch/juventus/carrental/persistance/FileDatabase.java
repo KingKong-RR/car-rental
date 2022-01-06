@@ -11,7 +11,11 @@ import org.springframework.stereotype.Repository;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
+import java.util.Random;
+
+import static java.util.Comparator.comparing;
 
 @Repository
 public class FileDatabase implements Database {
@@ -59,10 +63,10 @@ public class FileDatabase implements Database {
     @Override
     public String addCar(Car car) {
         ArrayList<Car> carList = readCarRepository();
+        //car.setId(new Random().longs(1).iterator().nextLong());
         carList.add(car);
         try {
             final ObjectMapper mapper = new ObjectMapper();
-
             mapper.writeValue(Paths.get(carRepository).toFile(),carList);
         } catch(IOException ex) {
             ex.printStackTrace();
