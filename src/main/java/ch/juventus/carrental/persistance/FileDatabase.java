@@ -18,6 +18,20 @@ public class FileDatabase implements Database {
     private Car car;
     private Long id;
 
+    private ArrayList<Car> readCarRepository() {
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            ArrayList<Car> carList = mapper.readValue(new File(carRepository), new TypeReference<>() {
+            });
+            return carList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return carList;
+    }
+
     @Override
     public String getStatus() {
         return "API OK";
@@ -25,40 +39,19 @@ public class FileDatabase implements Database {
 
     @Override
     public ArrayList<Car> getAllCars() {
-        /*
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            carList = new ArrayList<>(Files.readAllLines(Paths.get(carRepository)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ArrayList<Car> carList = readCarRepository();
+
         return carList;
-
-         */
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            return mapper.readValue(new File(carRepository), new TypeReference<>() {});
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
     public Car getCarById(Long id) {
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            ArrayList<Car> carList = mapper.readValue(new File(carRepository), new TypeReference<>() {});
-            for (Car car : carList) {
-               if (Objects.equals(car.getId(), id)) {
-                   return car;
-               }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       ArrayList<Car> carList = readCarRepository();
+       for (Car car : carList) {
+           if (Objects.equals(car.getId(), id)) {
+               return car;
+           }
+       }
         return null;
     }
 
@@ -70,14 +63,9 @@ public class FileDatabase implements Database {
 
     @Override
     public String deleteCarById(Long id) {
-        ObjectMapper mapper = new ObjectMapper();
+        ArrayList<Car> carList = readCarRepository();
+        carList.removeIf(car -> car.getId() == id);
 
-        try {
-            ArrayList<Car> carList = mapper.readValue(new File(carRepository), new TypeReference<>() {});
-            carList.removeIf(car -> car.getId() == id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return null;
     }
 
