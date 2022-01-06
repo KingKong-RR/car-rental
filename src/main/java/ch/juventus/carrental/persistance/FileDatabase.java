@@ -1,8 +1,11 @@
 package ch.juventus.carrental.persistance;
 
+import ch.juventus.carrental.CarRentalApplication;
 import ch.juventus.carrental.app.Car;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
@@ -12,7 +15,7 @@ import java.util.Objects;
 
 @Repository
 public class FileDatabase implements Database {
-
+    private static final Logger logger = LogManager.getLogger(CarRentalApplication.class);
     private String carRepository = "src/main/resources/carRepository.json";
     private ArrayList<Car> carList;
     private Car car;
@@ -26,6 +29,7 @@ public class FileDatabase implements Database {
             });
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e);
         }
 
         return carList;
@@ -38,9 +42,7 @@ public class FileDatabase implements Database {
 
     @Override
     public ArrayList<Car> getAllCars() {
-        ArrayList<Car> carList = readCarRepository();
-
-        return carList;
+        return readCarRepository();
     }
 
     @Override
@@ -56,7 +58,20 @@ public class FileDatabase implements Database {
 
     @Override
     public String addCar(Car car) {
+        ArrayList<Car> carList = readCarRepository();
         carList.add(car);
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+
+            mapper.writeValue(Paths.get(carRepository).toFile(),carList);
+        } catch(IOException ex) {
+            ex.printStackTrace();
+            logger.error(ex);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e);
+        }
         return null;
     }
 
@@ -70,10 +85,11 @@ public class FileDatabase implements Database {
             mapper.writeValue(Paths.get(carRepository).toFile(),carList);
         } catch(IOException ex) {
             ex.printStackTrace();
-            System.out.println(ex);
+            logger.error(ex);
         }
         catch (Exception e) {
             e.printStackTrace();
+            logger.error(e);
         }
 
         return null;
