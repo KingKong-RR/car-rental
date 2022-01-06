@@ -26,8 +26,17 @@ public class CarService {
         return database.getStatus();
     }
 
-    public ArrayList<Car> getAllCars() {
-        return database.getAllCars();
+    public List<Car> getAllCars(Filter filter) {
+        List<Car> carList = database.getAllCars();
+        FilterEvaluator evaluator = new FilterEvaluator(filter);
+
+        if (filter != null) {
+            carList = carList.stream()
+                    .filter(evaluator::passesAllFilters)
+                    .sorted(Comparator.comparingDouble(Car::getPricePerDay))
+                    .collect(Collectors.toList());
+        }
+        return carList;
     }
 
     public Car getCarById(Long id) {

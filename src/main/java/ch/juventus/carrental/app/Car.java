@@ -1,18 +1,23 @@
 package ch.juventus.carrental.app;
 
+import ch.juventus.carrental.model.CarType;
+import ch.juventus.carrental.model.Transmission;
+
 import java.util.Random;
 
 public class Car {
     private Long id = Math.abs(new Random().longs(1,1,9999999).iterator().nextLong());
     private String name;
-    private String type;
-    private String gearShift = "AUTOMATIC";
+    private CarType type;
+    private Transmission transmission;
     private int seats;
     private int pricePerDay;
     private Boolean airCondition;
 
-    public Car(String name, String type, String gearShift, int seats, int pricePerDay, Boolean airCondition) {
-        this.id = id;
+    public Car(Long id, String name, CarType type, Transmission transmission, int seats, int pricePerDay, Boolean airCondition) {
+        if (id != null) {
+            this.id = id;
+        }
         this.name = name;
         this.type = type;
         this.transmission = transmission;
@@ -40,20 +45,20 @@ public class Car {
         this.name = name;
     }
 
-    public String getType() {
+    public CarType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(CarType type) {
         this.type = type;
     }
 
-    public String getGearShift() {
-        return gearShift;
+    public Transmission getTransmission() {
+        return transmission;
     }
 
-    public void setGearShift(String gearShift) {
-        this.gearShift = gearShift;
+    public void setTransmission(Transmission transmission) {
+        this.transmission = transmission;
     }
 
     public int getSeats() {
@@ -79,7 +84,6 @@ public class Car {
     public void setAirCondition(Boolean airCondition) {
         this.airCondition = airCondition;
     }
-
 
     @Override
     public String toString() {

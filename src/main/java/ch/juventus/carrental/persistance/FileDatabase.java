@@ -26,12 +26,15 @@ public class FileDatabase implements Database {
     private Long id;
     */
 
-    private ArrayList<Car> readCarRepository() {
+    private List<Car> readCarRepository() {
+        List<Car> carList = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            return mapper.readValue(new File(carRepository), new TypeReference<>() {
-            });
+            carList.addAll( mapper.readValue(new File(carRepository), new TypeReference<>() {
+            }));
+        } catch (MismatchedInputException e) {
+            logger.info("No content in car repository");
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e);
@@ -46,13 +49,13 @@ public class FileDatabase implements Database {
     }
 
     @Override
-    public ArrayList<Car> getAllCars() {
+    public List<Car> getAllCars() {
         return readCarRepository();
     }
 
     @Override
     public Car getCarById(Long id) {
-       ArrayList<Car> carList = readCarRepository();
+       List<Car> carList = readCarRepository();
        for (Car car : carList) {
            if (Objects.equals(car.getId(), id)) {
                return car;
@@ -63,17 +66,15 @@ public class FileDatabase implements Database {
 
     @Override
     public String addCar(Car car) {
-        ArrayList<Car> carList = readCarRepository();
+        List<Car> carList = readCarRepository();
         logger.info("Car added: " + car);
         carList.add(car);
         try {
             final ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(Paths.get(carRepository).toFile(),carList);
-        } catch(IOException ex) {
-            ex.printStackTrace();
-            logger.error(ex);
-        }
-        catch (Exception e) {
+        } catch(MismatchedInputException e) {
+            logger.info("No content in car repository");
+        } catch (IOException e) {
             e.printStackTrace();
             logger.error(e);
         }
@@ -82,12 +83,14 @@ public class FileDatabase implements Database {
 
     @Override
     public String deleteCarById(Long id) throws IOException {
-        ArrayList<Car> carList = readCarRepository();
-        carList.removeIf(car -> Objects.equals(car.getId(), id));
+        List<Car> carList = readCarRepository();
+        carList = carList.stream().filter(carid -> id != id).collect(Collectors.toList());
+        logger.info("Deleting car " + id);
         try {
             final ObjectMapper mapper = new ObjectMapper();
 
             mapper.writeValue(Paths.get(carRepository).toFile(),carList);
+            return "Deleted";
         } catch(IOException ex) {
             ex.printStackTrace();
             logger.error(ex);

@@ -3,11 +3,11 @@ package ch.juventus.carrental.persistance;
 import ch.juventus.carrental.app.Car;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Database {
     String getStatus();
-    ArrayList<Car> getAllCars();
+    List<Car> getAllCars();
     Car getCarById(Long id);
 
     String addCar(Car car);
