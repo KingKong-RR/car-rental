@@ -11,16 +11,12 @@ import org.springframework.stereotype.Repository;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Objects;
-import java.util.Random;
-
-import static java.util.Comparator.comparing;
 
 @Repository
 public class FileDatabase implements Database {
     private static final Logger logger = LogManager.getLogger(CarRentalApplication.class);
-    private String carRepository = "src/main/resources/carRepository.json";
+    private final String carRepository = "src/main/resources/carRepository.json";
     private ArrayList<Car> carList;
     private Car car;
     private Long id;
@@ -63,7 +59,7 @@ public class FileDatabase implements Database {
     @Override
     public String addCar(Car car) {
         ArrayList<Car> carList = readCarRepository();
-        //car.setId(new Random().longs(1).iterator().nextLong());
+        logger.info("Car added: " + car);
         carList.add(car);
         try {
             final ObjectMapper mapper = new ObjectMapper();

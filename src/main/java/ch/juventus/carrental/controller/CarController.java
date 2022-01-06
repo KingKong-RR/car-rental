@@ -3,9 +3,6 @@ package ch.juventus.carrental.controller;
 import ch.juventus.carrental.CarRentalApplication;
 import ch.juventus.carrental.app.Car;
 import ch.juventus.carrental.service.CarService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost,http://127.0.0.1", maxAge = 3600)
 @RestController
@@ -60,15 +58,9 @@ public class CarController {
         return null;
     }
 
-    // http://localhost:8080/api/v1/cars?filter={airCondition: false, type: SUV, etc}
-    /*
     @GetMapping("/api/v1/cars")
-    public ResponseEntity<String> getCar(@RequestParam(value = "filter", required = false) Filter filter) {
-        if (filter != null) {
-            //get all cars and apply filter
-        } else {
-            //get all cars
-        }
+    public ResponseEntity<String> getCar(@RequestBody Car car) {
+        logger.info("Searching for car with attributes: " + car);
+        return null;
     }
-     */
 }

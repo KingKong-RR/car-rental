@@ -30,7 +30,9 @@ public class CarService {
         return database.getCarById(id);
     }
 
-    public String addCar(Car car) { return database.addCar(this.car); }
+    public String addCar(Car car) {
+        return database.addCar(car);
+    }
 
     public String deleteCarById(Long id) throws IOException {
         return database.deleteCarById(id);

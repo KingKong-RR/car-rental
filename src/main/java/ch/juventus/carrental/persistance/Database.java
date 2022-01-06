@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public interface Database {
-//    private Car car;
     String getStatus();
     ArrayList<Car> getAllCars();
     Car getCarById(Long id);
