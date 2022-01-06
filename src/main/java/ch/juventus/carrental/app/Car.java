@@ -80,7 +80,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +

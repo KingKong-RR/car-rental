@@ -3,11 +3,13 @@ package ch.juventus.carrental.persistance;
 import ch.juventus.carrental.app.Car;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Repository;
 
-import java.io.File;
-
+import java.io.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Repository
@@ -31,6 +33,13 @@ public class FileDatabase implements Database {
 
         return carList;
     }
+
+    /*
+    private void writeCarRepository() {
+        Path outFile = Paths.get(carRepository);
+        List<String> carArray = new ArrayList<>(Arrays.asList());
+    }
+    */
 
     @Override
     public String getStatus() {
@@ -62,9 +71,21 @@ public class FileDatabase implements Database {
     }
 
     @Override
-    public String deleteCarById(Long id) {
+    public String deleteCarById(Long id) throws IOException {
         ArrayList<Car> carList = readCarRepository();
         carList.removeIf(car -> car.getId() == id);
+        try {
+            /*
+            FileWriter outFile = new File(carRepository);
+            outFile.write(carList);
+            */
+//            final StringWriter writer = new StringWriter();
+            final ObjectMapper mapper = new ObjectMapper();
+
+            mapper.writeValue(Paths.get(carRepository).toFile(),carList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return null;
     }

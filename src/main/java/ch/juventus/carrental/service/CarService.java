@@ -5,6 +5,7 @@ import ch.juventus.carrental.persistance.Database;
 import ch.juventus.carrental.persistance.FileDatabase;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Service
@@ -31,7 +32,7 @@ public class CarService {
 
     public String addCar(Car car) { return database.addCar(this.car); }
 
-    public String deleteCarById(Long id) {
+    public String deleteCarById(Long id) throws IOException {
         return database.deleteCarById(id);
     }
 }
