@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost,http://127.0.0.1", maxAge = 3600)
 @RestController
 public class CarController {
 
@@ -27,12 +28,14 @@ public class CarController {
         this.carService = carService;
     }
 
+    @CrossOrigin
     @GetMapping("/api/v1/status")
     public ResponseEntity<String> getStatus() {
         String response = carService.getStatus();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/api/v1/car/{id}")
     public ResponseEntity<Car> getCarById(@PathVariable Long id) {
         return new ResponseEntity<>(carService.getCarById(id), HttpStatus.OK);
@@ -45,6 +48,7 @@ public class CarController {
         return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @DeleteMapping("/api/v1/car/{id}")
     public ResponseEntity<String> deleteCarByID(@PathVariable Long id) throws IOException {
         return new ResponseEntity<>(carService.deleteCarById(id), HttpStatus.OK);

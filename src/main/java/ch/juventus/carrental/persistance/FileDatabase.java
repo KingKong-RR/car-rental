@@ -3,13 +3,11 @@ package ch.juventus.carrental.persistance;
 import ch.juventus.carrental.app.Car;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 @Repository
@@ -24,22 +22,14 @@ public class FileDatabase implements Database {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            ArrayList<Car> carList = mapper.readValue(new File(carRepository), new TypeReference<>() {
+            return mapper.readValue(new File(carRepository), new TypeReference<>() {
             });
-            return carList;
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return carList;
     }
-
-    /*
-    private void writeCarRepository() {
-        Path outFile = Paths.get(carRepository);
-        List<String> carArray = new ArrayList<>(Arrays.asList());
-    }
-    */
 
     @Override
     public String getStatus() {
@@ -73,22 +63,20 @@ public class FileDatabase implements Database {
     @Override
     public String deleteCarById(Long id) throws IOException {
         ArrayList<Car> carList = readCarRepository();
-        carList.removeIf(car -> car.getId() == id);
+        carList.removeIf(car -> Objects.equals(car.getId(), id));
         try {
-            /*
-            FileWriter outFile = new File(carRepository);
-            outFile.write(carList);
-            */
-//            final StringWriter writer = new StringWriter();
             final ObjectMapper mapper = new ObjectMapper();
 
             mapper.writeValue(Paths.get(carRepository).toFile(),carList);
-        } catch (Exception e) {
+        } catch(IOException ex) {
+            ex.printStackTrace();
+            System.out.println(ex);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
         return null;
     }
-
 
 }

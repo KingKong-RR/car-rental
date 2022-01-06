@@ -7,10 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class FileDatabaseTest {
 
     @Test
-    void loadHelloWorldGreeting() {
-    }
-
-    @Test
     void getAllCars() {
     }
 
