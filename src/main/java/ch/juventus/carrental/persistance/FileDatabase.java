@@ -19,8 +19,8 @@ public class FileDatabase implements Database {
     private Long id;
 
     @Override
-    public String loadHelloWorldGreeting() {
-        return "Hello, world!";
+    public String getStatus() {
+        return "API OK";
     }
 
     @Override

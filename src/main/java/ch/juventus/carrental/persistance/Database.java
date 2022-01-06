@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface Database {
 //    private Car car;
-    String loadHelloWorldGreeting();
+    String getStatus();
     ArrayList<Car> getAllCars();
     Car getCarById(Long id);
 

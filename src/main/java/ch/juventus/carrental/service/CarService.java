@@ -17,8 +17,8 @@ public class CarService {
         this.database = fileDatabase;
     }
 
-    public String getHelloWorldGreeting() {
-        return database.loadHelloWorldGreeting();
+    public String getStatus() {
+        return database.getStatus();
     }
 
     public ArrayList<Car> getAllCars() {

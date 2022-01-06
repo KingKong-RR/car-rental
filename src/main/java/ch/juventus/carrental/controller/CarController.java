@@ -26,9 +26,9 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping("/api/v1/helloWorld")
-    public ResponseEntity<String> helloWorld() {
-        String response = carService.getHelloWorldGreeting();
+    @GetMapping("/api/v1/status")
+    public ResponseEntity<String> getStatus() {
+        String response = carService.getStatus();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -44,8 +44,8 @@ public class CarController {
         return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 
-    @PostMapping(path="/api/v1/car")
     /*
+    @PostMapping(path="/api/v1/car")
     public ResponseEntity<String> addCar(@RequestParam Long id, @RequestParam String name,
                                        @RequestParam String type, @RequestParam String gearShift,
                                        @RequestParam int seats, @RequestParam int pricePerDay,
@@ -55,7 +55,7 @@ public class CarController {
     /* TOFIX:
     public ResponseEntity<String> addCar(@RequestBody Long id, String name, String type, String gearShift,
                                                int seats, int pricePerDay, Boolean airCondition) {
-        //Car car = new Car(new ObjectMapper().readValue(id, name, type, gearShift, seats, pricePerDay, airCondition), new TypeReference<>() {});
+        Car car = new Car(new ObjectMapper().readValue(id, name, type, gearShift, seats, pricePerDay, airCondition), new TypeReference<>() {});
         carService.addCar(car);
         return new ResponseEntity<String>(car.toString(), HttpStatus.CREATED);
     }
