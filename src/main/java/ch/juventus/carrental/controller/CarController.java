@@ -44,6 +44,11 @@ public class CarController {
         return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 
+    @DeleteMapping("/api/v1/car/{id}")
+    public ResponseEntity<String> deleteCarByID(@PathVariable Long id) {
+        return new ResponseEntity<>(carService.deleteCarById(id), HttpStatus.OK);
+    }
+
     /*
     @PostMapping(path="/api/v1/car")
     public ResponseEntity<String> addCar(@RequestParam Long id, @RequestParam String name,

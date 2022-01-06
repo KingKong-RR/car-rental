@@ -68,5 +68,18 @@ public class FileDatabase implements Database {
         return null;
     }
 
+    @Override
+    public String deleteCarById(Long id) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            ArrayList<Car> carList = mapper.readValue(new File(carRepository), new TypeReference<>() {});
+            carList.removeIf(car -> car.getId() == id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

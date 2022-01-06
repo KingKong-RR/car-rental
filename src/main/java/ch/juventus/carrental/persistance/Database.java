@@ -11,4 +11,6 @@ public interface Database {
     Car getCarById(Long id);
 
     String addCar(Car car);
+
+    String deleteCarById(Long id);
 }

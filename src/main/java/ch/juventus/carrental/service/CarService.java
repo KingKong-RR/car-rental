@@ -30,4 +30,8 @@ public class CarService {
     }
 
     public String addCar(Car car) { return database.addCar(this.car); }
+
+    public String deleteCarById(Long id) {
+        return database.deleteCarById(id);
+    }
 }
