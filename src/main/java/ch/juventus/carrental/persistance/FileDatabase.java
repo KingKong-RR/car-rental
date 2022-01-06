@@ -4,6 +4,7 @@ import ch.juventus.carrental.CarRentalApplication;
 import ch.juventus.carrental.app.Car;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
@@ -11,15 +12,19 @@ import org.springframework.stereotype.Repository;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Repository
 public class FileDatabase implements Database {
     private static final Logger logger = LogManager.getLogger(CarRentalApplication.class);
     private final String carRepository = "src/main/resources/carRepository.json";
-    private ArrayList<Car> carList;
+    /* TODO Marked for removal
+    private List<Car> carList;
     private Car car;
     private Long id;
+    */
 
     private ArrayList<Car> readCarRepository() {
         ObjectMapper mapper = new ObjectMapper();

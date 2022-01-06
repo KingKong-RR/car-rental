@@ -2,11 +2,15 @@ package ch.juventus.carrental.controller;
 
 import ch.juventus.carrental.CarRentalApplication;
 import ch.juventus.carrental.app.Car;
+import ch.juventus.carrental.model.Filter;
 import ch.juventus.carrental.service.CarService;
+import ch.juventus.carrental.util.FilterEditor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -57,10 +61,12 @@ public class CarController {
         carService.addCar(car);
         return null;
     }
-
+/*
     @GetMapping("/api/v1/cars")
     public ResponseEntity<String> getCar(@RequestBody Car car) {
         logger.info("Searching for car with attributes: " + car);
         return null;
     }
+
+ */
 }

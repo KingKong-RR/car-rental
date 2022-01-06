@@ -3,7 +3,7 @@ package ch.juventus.carrental.app;
 import java.util.Random;
 
 public class Car {
-    private Long id = Math.abs(new Random().longs(1).iterator().nextLong());
+    private Long id = Math.abs(new Random().longs(1,1,9999999).iterator().nextLong());
     private String name;
     private String type;
     private String gearShift = "AUTOMATIC";
@@ -15,7 +15,7 @@ public class Car {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.gearShift = gearShift;
+        this.transmission = transmission;
         this.seats = seats;
         this.pricePerDay = pricePerDay;
         this.airCondition = airCondition;
@@ -87,7 +87,7 @@ public class Car {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", gearShift='" + gearShift + '\'' +
+                ", transmission='" + transmission + '\'' +
                 ", seats=" + seats +
                 ", pricePerDay=" + pricePerDay +
                 ", airCondition=" + airCondition +
